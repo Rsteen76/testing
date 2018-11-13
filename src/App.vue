@@ -1,10 +1,12 @@
 <template>
-  <v-app>
-    <h1>This is where the content goes</h1>
-  </v-app>
+<v-app>
+<router-view></router-view>
+</v-app>
 </template>
 
 <script>
+
+
 export default {
   data () {
     return {
@@ -13,3 +15,14 @@ export default {
   }
 }
 </script>
+<style>
+html {
+  margin-top: 45px;
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+
+
+</style>
