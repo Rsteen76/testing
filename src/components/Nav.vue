@@ -153,8 +153,14 @@
 }
 @media screen and (max-width: 600px) {
   .topnav span {
-    font-size: 20px;
-    padding: 10px;
+    font-size: 25px;
+    padding: 8px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .topnav span {
+    font-size: 15px;
+    padding: 14px;
   }
 }
 </style>
