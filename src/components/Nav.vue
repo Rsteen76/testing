@@ -1,6 +1,17 @@
 <template>
-  <div class="topnav">
-    <v-toolbar fixed dense dark >
+    <div class="topnav" id="myTopnav" :class="{responsive: isActive}">
+      <a href="#/" class="active">Green Tree</a>
+      <template v-if="auth">
+        <a @click="logout" style="float: right;">Logout</a>
+      </template>
+      <!-- <a v-if="!auth" style="float: right;" href="#/login">Login</a> -->
+      <!-- <a href="#" class="icon">
+        <i class="fa fa-bars" @click="isActive = !isActive"></i>
+      </a> -->
+      <span @click="login(counter)" class="meeting-time"><strong>Next Meeting {{moment(schedules[1].date).format('M/D') }} in
+          {{schedules[1].location}}</strong></span>
+    </div>
+    <!-- <v-toolbar fixed dense dark app="true">
       <v-toolbar-title>Green Tree</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text class="title"><strong>Next Meeting {{moment(schedules[1].date).format('MMMM Do') }} in
@@ -27,8 +38,7 @@
         <v-btn @click="logout">Logout</v-btn>
       </v-toolbar-items>
       </template>
-    </v-toolbar>
-  </div>
+    </v-toolbar> -->
 </template>
 
 <script>
@@ -38,6 +48,8 @@
 
   export default {
     data: ()  => ({
+      counter: 0,
+      isActive : false,
       auth: localStorage.auth,
       name: localStorage.name,
       items: [
@@ -54,16 +66,27 @@
       date: ""
     }),
     methods: {
+      login() {
+        this.counter++
+        console.log(this.counter)
+        if (this.counter == 5) {
+          this.counter = 0
+          this.$router.push ({
+            name: 'login'
+          })
+        }
+      },
       // Load all Schedules from database
       load() {
-            http
-                .get("schedules")
-                .then(response => {
-                    this.schedules = response.data.schedules;
-                })
-                .catch(e => {
-                    this.errors.push(e);
-                });
+        this.counter = 0  
+        http
+            .get("schedules")
+            .then(response => {
+                this.schedules = response.data.schedules;
+            })
+            .catch(e => {
+                this.errors.push(e);
+            });
       },
       moment: function (date) {
         return moment(date);
@@ -81,8 +104,57 @@
   }
 </script>
 
-<style>
+<style scoped>
+.topnav {
+    background-color: #333333;
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index: 999999;
+    text-align: center;
+    height: 50px;
+}
 
+/* Style the links inside the navigation bar */
+.topnav  a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 17px;
+}
+.topnav  span {
+  color: #f2f2f2;
+  padding-top: 3px;
+  display: block;
+  float: none;
+  text-align: center;
+  font-size: 30px;
+}
+/* Change the color of links on hover */
+.topnav a:hover {
+  padding: 15px;
+  background-color: #ddd;
+  color: black;
+}
 
+/* Add an active class to highlight the current page */
+.active {
+    background-color: green;
+    color: white;
+    height: 50px;
+}
 
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+    display: none;
+}
+@media screen and (max-width: 600px) {
+  .topnav span {
+    font-size: 20px;
+    padding: 10px;
+  }
+}
 </style>

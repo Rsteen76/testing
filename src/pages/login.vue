@@ -1,4 +1,6 @@
 <template>
+<div>
+<Nav />
 <v-container>
   <v-form v-model="valid" ref="form" lazy-validation>
     <v-text-field
@@ -21,11 +23,16 @@
     <v-btn @click="clear">clear</v-btn>
   </v-form>
   </v-container>
+</div>
 </template>
 <script>
-import { http } from "../config/http.js";
+import { http } from "../config/http.js"
+import Nav from "../components/Nav.vue"
 
 export default {
+  components:{
+    Nav
+  },
   data: () => ({
     valid: true,
     user: {

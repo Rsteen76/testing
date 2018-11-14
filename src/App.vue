@@ -17,12 +17,13 @@ export default {
 </script>
 <style>
 html {
-  margin-top: 45px;
+  margin-top: 25px;
   height: 100%;
 }
 body {
   height: 100%;
-}
+  margin-top: 25px;
 
+}
 
 </style>

@@ -52,13 +52,13 @@ exports.login = async (req, res) => {
       .exec()
       .then(user => {
         if (user.length < 1) {
-          return res.status(401).json({
+          return res.status(401).send({
             message: 'Unauthorized'
           })
         }
         bcrypt.compare(req.body.password, user[0].password, (err, result) => {
           if (err) {
-            return res.status(401).json({
+            return res.status(401).send({
               message: 'Unauthorized'
             })
           }
@@ -78,14 +78,14 @@ exports.login = async (req, res) => {
               name: user[0].name
             })
           }
-          return res.status(401).json({
+          return res.status(401).send({
             message: 'Unauthorized'
           })
         })
       })
       .catch(err => {
         console.log(err)
-        res.status(500).json({
+        res.status(500).send({
           error: err
         })
       })
