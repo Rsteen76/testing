@@ -53,7 +53,7 @@ export default {
     edit() {
       this.editDone = false
       http
-        .put("/users/" + this.user._id, this.changedUser)
+        .put("/users/" + this.user._id, this.changedUser, { headers: { 'Authorization': 'Bearer ' + localStorage.auth }})
         .then(response => {
           this.alert(true, 'Edit', 'User')
           this.editDone = true

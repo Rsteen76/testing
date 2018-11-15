@@ -1,25 +1,25 @@
-//import the schedule constant explicitly
+// Import the schedule constant explicitly
 const { Schedule } = require('../models')
 
-//show all schedules
-exports.index =  async (req, res) => {
-  //query the DB of all schedules
+// show all schedules
+exports.index = async (req, res) => {
+  // query the DB of all schedules
   await Schedule.find().exec()
   .then(schedules => {
     res.json({ schedules: schedules})
   })
   .catch(err => {
-    res.json({ error: err, message: "Could not retrieve schedules"}).status(500)
+    res.json({ error: err, message: 'Could not retrieve schedules'}).status(500)
   })
-} 
+}
 
-//Store a new schedule
+// Store a new schedule
 exports.store = async (req, res) => {
   let schedule = new Schedule(req.body)
-  //save it in the DB
+  // save it in the DB
   await schedule.save()
     .then(schedule => {
-      //send a 201 and the new resource
+      // send a 201 and the new resource
       res.status(201).json({ data: schedule })
     })
     .catch(err => {
@@ -28,10 +28,9 @@ exports.store = async (req, res) => {
     })
 }
 
-//this function is for looking at one schedule by their mongo id
+// This function is for looking at one schedule by their mongo id
 exports.show = async (req, res) => {
-
-  //Find a schedule
+  // Find a schedule
   await schedule.findById(req.params.id).exec()
   .then(schedule => {
     res.json({ schedule: schedule})
@@ -41,12 +40,12 @@ exports.show = async (req, res) => {
   })
 }
 
-//Delete a Schedule 
+// Delete a Schedule
 exports.delete = async (req, res) => {
-  //find the sneaky boye and make him go away
+  // find the sneaky boye and make him go away
   await Schedule.findByIdAndRemove(req.params.id).exec()
   .then(() => {
-    //let em know there aint no content no mo
+    // let em know there aint no content no mo
     res.status(204).json()
   })
   .catch(err => {
@@ -54,8 +53,9 @@ exports.delete = async (req, res) => {
   })
 }
 
-//Edit a schedule based on ID
+// Edit a schedule based on ID
 exports.update = async (req, res) => {
+  console.log(req.body)
   await Schedule
   .findByIdAndUpdate(req.params.id, req.body, { new: true })
   .exec()
@@ -66,5 +66,3 @@ exports.update = async (req, res) => {
       res.status(500).json({err: err})
     })
 }
-
-

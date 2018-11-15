@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="calendar">
     <v-layout row wrap>
       <v-flex xs12  mb-3 elevation-15>
         <v-expansion-panel popout>
@@ -59,5 +59,7 @@ import moment from 'moment'
 </script>
 
 <style scoped>
-
+.calendar,.headline,.display-1 {
+  font-family: 'Libre Baskerville', serif !important;
+}
 </style>

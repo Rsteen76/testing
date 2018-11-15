@@ -59,7 +59,7 @@ export default {
           console.log(error);
           const message = error.response.data.message;
           this.$swal("Oh oo!", `${message}`, "error");
-          this.$router.push({ name: "login" });
+          this.$router.push({ name: 'schedules' });
         });
     },
     clear() {

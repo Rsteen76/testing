@@ -8,7 +8,7 @@ const checkAuth = require('../middleware/check-auth')
 const router = express.Router()
 
 // get all users
-router.get('/', usersController.index)
+router.get('/', checkAuth, usersController.index)
 
 // make a new schedule
 router.post('/', usersController.store)

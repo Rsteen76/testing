@@ -2,7 +2,7 @@
 
 <div id="home" class="cd-fixed-bg cd-fixed-bg--1">
     <Nav py-5 />
-    <Hero2 />
+    <Hero />
     <v-layout align-center justify-center py-5>
       <About />
     </v-layout>
@@ -25,7 +25,7 @@
 import Parallax from "vue-parallaxy";
 
 import Nav from "../components/Nav.vue";
-import Hero2 from "../components/Hero2.vue";
+import Hero from "../components/Hero.vue";
 import About from "../components/About.vue";
 import Quotes from "../components/Quotes.vue";
 import Children from "../components/Children.vue";
@@ -36,7 +36,7 @@ export default {
   components: {
     Parallax,
     Nav,
-    Hero2,
+    Hero,
     About,
     Quotes,
     Children,

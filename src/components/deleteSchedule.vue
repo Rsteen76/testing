@@ -35,7 +35,7 @@ export default {
     confirmDelete() {
       this.deleteDone = false
       http
-        .delete("/schedules/" + this.schedule._id)
+        .delete("/schedules/" + this.schedule._id, { headers: { 'Authorization': 'Bearer ' + localStorage.auth }})
         .then(response => {
           this.deleteDone = true
           this.alert(true, 'Delete', 'Schedule')

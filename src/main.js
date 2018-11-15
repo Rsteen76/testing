@@ -9,13 +9,10 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(VueSweetalert2)
 Vue.use(Vuetify, { theme: {
-  primary: '#1976D2',
-  secondary: '#424242',
-  accent: '#82B1FF',
-  error: '#FF5252',
-  info: '#2196F3',
-  success: '#4CAF50',
-  warning: '#FFC107'
+  primary: '#0D47A1',
+  primaryText: '#FFFFFF',
+  secondary: '#90CAF9',
+  lightText: '#000000'
 }})
 
 Vue.config.productionTip = false

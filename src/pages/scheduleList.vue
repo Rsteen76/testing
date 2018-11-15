@@ -44,6 +44,7 @@
                     <td class="text-xs-center">{{ props.item.busyBees }}</td>
                     <td class="text-xs-center">{{ props.item.nursery }}</td>
                     <td class="text-xs-center">{{ props.item.logistics }}</td>
+                    <td class="text-xs-center">{{ props.item.mealTheme }}</td>
                     <td class="justify-center layout px-0">
                       
                       <v-dialog v-model="editDialog" lazy absolute max-width="50%">
@@ -52,7 +53,7 @@
                         edit 
                       </v-icon>
                       </v-btn>
-                      <editSchedule :schedule="scheduleToDelete" @closeDelete="deleteDialog = false" @alert="alert"></editSchedule>
+                      <editSchedule :schedule="scheduleToEdit" @closeEdit="editDialog = false" @alert="alert"></editSchedule>
                       </v-dialog>
                       
                       <v-dialog v-model="deleteDialog" lazy absolute max-width="50%">
@@ -103,7 +104,8 @@ export default {
            { text: "Teacher", align: 'center' },
            { text: "Busy Bees", align: 'center'},
            { text: "Nursery", align: 'center'},
-           { text: "Logistics", align: 'center'}
+           { text: "Logistics", align: 'center'},
+           { text: "Meal Theme", align: 'centet'}
         ]
     }),
     components: {
@@ -116,7 +118,7 @@ export default {
         //Load all schedules from database
         load() {
             http
-                .get("schedules")
+                .get("/schedules/", { headers: { 'Authorization': 'Bearer ' + localStorage.auth }})
                 .then(response => {
                     this.schedules = response.data.schedules;
                 })

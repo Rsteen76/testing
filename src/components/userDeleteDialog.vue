@@ -35,7 +35,7 @@ export default {
     confirmDelete() {
       this.deleteDone = false
       http
-        .delete("/users/" + this.user._id)
+        .delete("/users/" + this.user._id, { headers: { 'Authorization': 'Bearer ' + localStorage.auth }})
         .then(response => {
           this.deleteDone = true
           this.alert(true, 'Delete', 'User')

@@ -1,6 +1,8 @@
 <template>
     <div class="topnav" id="myTopnav" :class="{responsive: isActive}">
+      <div>
       <a href="#/" class="active">Green Tree</a>
+      </div>
       <template v-if="auth">
         <a @click="logout" style="float: right;">Logout</a>
       </template>
@@ -114,6 +116,7 @@
     z-index: 999999;
     text-align: center;
     height: 50px;
+    font-family: 'Libre Baskerville', serif
 }
 
 /* Style the links inside the navigation bar */
@@ -153,14 +156,16 @@
 }
 @media screen and (max-width: 600px) {
   .topnav span {
-    font-size: 25px;
+    font-size: 20px;
     padding: 8px;
   }
 }
 @media screen and (max-width: 500px) {
   .topnav span {
-    font-size: 15px;
+    font-size: 12px;
     padding: 14px;
+    padding-left: 100px
+    
   }
 }
 </style>

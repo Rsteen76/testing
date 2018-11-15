@@ -34,8 +34,8 @@
         <v-text-field label="Busy Bees Leader" v-model="schedule.busyBees"> </v-text-field>
         <v-text-field label="Nursery Leader" v-model="schedule.nursery"> </v-text-field>
         <v-text-field label="Logistic Leader" v-model="schedule.logistics"> </v-text-field>
+        <v-text-field label="Meal Theme" v-model="schedule.mealTheme"> </v-text-field>
         </v-form>
-
         <v-card-actions>
           <v-btn @click="btnsubmit()" class="green lighten-1 white--text" :loading="!submitDone">Submit</v-btn>
           <v-spacer></v-spacer>
@@ -61,7 +61,8 @@ export default {
       teacher: "",
       busyBees: "",
       nursery: "",
-      logistics: ""
+      logistics: "",
+      mealTheme: ""
     },
     submitDone: true,
   }),
@@ -99,7 +100,8 @@ export default {
         teacher: "",
         busyBees: "",
         nursery: "",
-        logistics: ""
+        logistics: "",
+        mealTheme: ""
       };
       this.submitDone = true;
     },

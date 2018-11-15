@@ -1,6 +1,5 @@
 <template>
-<v-container id="greenBlur" elevation-15
-       :style="{ backgroundImage: 'url(https://s3-us-west-2.amazonaws.com/greentreeme/BG_greenBlur.jpg)' }">
+<v-container class="quotes" id="greenblur">
   <v-carousel id = "quotes-carousel" hide-delimiters hide-controls>
     <v-carousel-item
       v-for="(item,i) in items"
@@ -11,6 +10,7 @@
     ></v-carousel-item>
   </v-carousel>
 </v-container>
+  
 </template>
 
 <script>
@@ -19,16 +19,16 @@
       return {
         items: [
           {
-            src: ''
+            src: '/static/trees.jpeg'
           },
           {
-            src: ''
+            src: '/static/drop.jpeg'
           },
           {
-            src: ''
+            src: '/static/grassdrop.jpeg'
           },
           {
-            src: ''
+            src: '/static/water.jpeg'
           }
         ]
       }
@@ -36,9 +36,12 @@
   }
 </script>
 <style lang="stylus" scoped>
+.quotes {
+  font-family: 'Playfair Display SC', serif;
+}
   #greenBlur
   .image
-    height: 30vh;
+    height: 20vh;
     widows: 100vw;
     overflow: hidden;
     position: relative;
@@ -47,7 +50,7 @@
   #quotes-carousel
   .image
     height: 20vh;
-    widows: 100vw;
+    windows: 100vw;
     overflow: hidden;
     position: relative;
 
