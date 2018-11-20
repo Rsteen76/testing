@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <div class="logo-div">
+    <div class="center">
       <transition 
         name="big" 
         mode="out-in">
@@ -70,27 +70,24 @@
                 If you have any questions, comments, or concerns, please reach out to our fellowship by sending an email to <a href="mailto:info@greentree.me">info@greentree.me</a>
                 <br/><br/>
                 Thanks, and God bless!
-
               </v-card-text>
             </div>
           </v-card-title>
         </v-card>
       </div>
+      <div v-if="showSchedule">
+        <Calendar/>
+      </div>
       </transition>
     </div>
+
+    <!-- Buttons -->
     <img src="/static/ButtonHome.png" @click="showButtons=true, showChildren=false, showInfo=false, showSchedule=false"  class="about-button custom-button"/>
     <transition 
       name="custom-classes-transition" 
       enter-active-class="animated fadeInLeft" 
       leave-active-class="animated fadeOutLeft">
       <img src="/static/ButtonKids.png" @click="showChildren=!showChildren, showButtons=!showButtons" v-if="showButtons" class="custom-button children-button"/>
-    </transition>
-    <transition 
-      name="custom-classes-transition"
-      mode="out-in" 
-      enter-active-class="animated zoomIn" 
-      leave-active-class="animated zoomOut">
-
     </transition>
     <transition 
       name="custom-classes-transition" 
@@ -100,34 +97,9 @@
     </transition>
     <transition 
       name="custom-classes-transition" 
-      enter-active-class="animated zoomIn" 
-      leave-active-class="animated zoomOut">
-      
-    </transition>
-    <transition 
-      name="custom-classes-transition" 
       enter-active-class="animated fadeInRight" 
       leave-active-class="animated fadeOutRight">
       <img src="/static/ButtonCalendar.png" @click="showSchedule=!showSchedule, showButtons=!showButtons" v-if="showButtons" class="custom-button schedule-button"/>
-    </transition>
-    <transition 
-      name="custom-classes-transition" 
-      enter-active-class="animated zoomIn" 
-      leave-active-class="animated zoomOut">
-      <div v-if="showSchedule" class="about-content">
-        <b-card 
-          title="Card Title" 
-          img-src="https://picsum.photos/600/300/?image=25" 
-          img-alt="Image" 
-          img-top 
-          tag="article"
-          class="mb-2">
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the bulk of the card's content.
-          </p>
-          <b-button @click="showSchedule=!showSchedule, showButtons=!showButtons" variant="primary">Go somewhere</b-button>
-        </b-card>
-      </div>
     </transition>
   </div>
 </template>
@@ -188,10 +160,10 @@ export default {
   width: 25%;
   min-width: 400px; 
 }
-.logo-div {
+.center {
   text-align: center;
   position: relative;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
   display: block;
   margin: auto;
@@ -255,8 +227,7 @@ export default {
 }
 @media only screen and ( max-width: 800px ) {
   .custom-button {
-    min-width:30%;
-    transition: all .3s ease-in
+    min-width:100px;
   }
   
   .green-tree {
@@ -264,6 +235,7 @@ export default {
     top: 30px;
     font-size: 3.75em;
   }
+
 .center {
   position: relative;
   top: 50%;
@@ -271,7 +243,7 @@ export default {
   display: block;
   margin: auto;
   width: 40%;
-  min-width: 300px;
+  min-width: 275px;
 }
   .about-content {
     position: absolute;
