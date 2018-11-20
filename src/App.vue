@@ -17,15 +17,11 @@ export default {
 </script>
 <style>
 html {
-  margin-top: 25px;
-  height: 100%;
+  height: 100vh;
 }
 body {
-  height: 100%;
-  margin-top: 25px;
+  height: 100vh;
   font-family: 'Cinzel', serif !important;
-
-
 }
 /* font-family: 'Libre Baskerville', serif;
 font-family: 'Open Sans Condensed', sans-serif;
