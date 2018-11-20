@@ -2,12 +2,10 @@
   <div class="home-page">
     <div class="logo-div">
       <transition 
-        name="custom-classes-transition" 
-        mode="out-in"
-        enter-active-class="animated zoomInBig" 
-        leave-active-class="animated zoomOutBig">
+        name="big" 
+        mode="out-in">
         <v-img src="/static/GreenTreeLogo.png" class="logo" v-if="showButtons"/>
-        
+
         <!-- Children Info Section -->
         <div v-if="showChildren" class="">
         <v-card max-height="75vh" class="scroll">
@@ -80,7 +78,7 @@
       </div>
       </transition>
     </div>
-    <img src="/static/ButtonHome.png" @click="show=!show, showButtons=true, showChildren=false, showInfo=false, showSchedule=false"  class="about-button custom-button"/>
+    <img src="/static/ButtonHome.png" @click="showButtons=true, showChildren=false, showInfo=false, showSchedule=false"  class="about-button custom-button"/>
     <transition 
       name="custom-classes-transition" 
       enter-active-class="animated fadeInLeft" 
@@ -288,6 +286,56 @@ export default {
     max-height: 350px;
     overflow-y: auto;
 }
+}
+@keyframes zoomOutBig {
+  from {
+    opacity: 1;
+  }
 
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(2, 2, 2);
+    transform: scale3d(2, 2, 2);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.big-leave-active {
+  -webkit-animation-name: zoomOutBig;
+  animation-name: zoomOutBig;
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes zoomInBig {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(2, 2, 2);
+    transform: scale3d(2, 2, 2);
+  }
+
+  50% {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.big-enter-active {
+  -webkit-animation-name: zoomInBig;
+  animation-name: zoomInBig;
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 </style>
