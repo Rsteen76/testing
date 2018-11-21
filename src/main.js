@@ -8,11 +8,12 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import 'animate.css'
 
+Vue.use(require('vue-moment'))
 Vue.use(VueSweetalert2)
 Vue.use(Vuetify, { theme: {
-  primary: '#0D47A1',
+  primary: '#153c00',
   primaryText: '#FFFFFF',
-  secondary: '#90CAF9',
+  secondary: '#f09300',
   lightText: '#000000'
 }})
 

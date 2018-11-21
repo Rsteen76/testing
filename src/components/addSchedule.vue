@@ -9,7 +9,7 @@
         <v-flex>
         <v-menu 
           ref="menu" 
-          :close-on-content-click="false" 
+          :close-on-content-click="true" 
           v-model="menu" 
           :nudge-right="0" 
           :return-value.sync="schedule.date"
@@ -22,7 +22,7 @@
             readonly>
           </v-text-field>
           <v-date-picker 
-            v-model="schedule.date" 
+            v-model="schedule.date"
             @input="$refs.menu.save(schedule.date)">
           </v-date-picker>
         </v-menu>
@@ -79,7 +79,7 @@ export default {
         console.log(this.schedule)
 
       http
-        .post("/schedules", this.schedule)
+        .post("/schedules", this.schedule, { headers: { 'Authorization': 'Bearer ' + localStorage.auth }})
         .then(response => {
           this.submit = true;
           this.alert(true, "Create", "Schedule");

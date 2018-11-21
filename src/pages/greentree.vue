@@ -4,7 +4,7 @@
       <transition 
         name="big" 
         mode="out-in">
-        <v-img src="/static/GreenTreeLogo.png" class="logo" v-if="showButtons"/>
+        <v-img @click="login(counter)" src="/static/GreenTreeLogo.png" class="logo" v-if="showButtons"/>
 
         <!-- Children Info Section -->
         <div v-if="showChildren" class="">
@@ -82,7 +82,7 @@
     </div>
 
     <!-- Buttons -->
-    <img src="/static/ButtonHome.png" @click="showButtons=true, showChildren=false, showInfo=false, showSchedule=false"  class="about-button custom-button"/>
+    <img src="/static/ButtonHome.png" @click="showButtons=true, showChildren=false, showInfo=false, showSchedule=false"  class="home-button custom-button"/>
     <transition 
       name="custom-classes-transition" 
       enter-active-class="animated fadeInLeft" 
@@ -128,6 +128,7 @@ export default {
   },
   data() {
     return {
+      counter: 0,
       showButtons: true,
       showLogo: true,
       showChildren: false,
@@ -135,7 +136,19 @@ export default {
       showSchedule: false,
     };
   },
-};
+  methods: {
+    login() {
+      this.counter++
+      console.log(this.counter)
+      if (this.counter == 5) {
+        this.counter = 0
+        this.$router.push ({
+          name: 'login'
+        })
+      }
+    },
+  }
+}
 </script>
 <style lang="stylus" scoped>
 .home-page {
@@ -179,7 +192,7 @@ export default {
   color: rgb(47, 170, 47);
   font-size: 7em;
 }
-.about-button {
+.home-button {
   margin-left: 0px;
   position: absolute;
   left: 0;

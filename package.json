@@ -29,6 +29,7 @@
     "path": "^0.12.7",
     "serve-favicon": "^2.5.0",
     "vue": "^2.5.2",
+    "vue-moment": "^4.0.0",
     "vue-parallaxy": "^1.1.1",
     "vue-router": "^3.0.1",
     "vue-sweetalert2": "^1.5.9",

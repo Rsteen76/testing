@@ -1,8 +1,7 @@
 <template>
-  <v-container class="pa-0">
-    <v-container>
+  <v-container class="pa-0 w-100" style="max-width:1500px">
       <template>
-        <v-layout row>
+        <v-layout row wrap class="w-100">
           <v-flex>
             <v-card>
               <v-toolbar class="primary primaryText--text">
@@ -36,7 +35,7 @@
                 <template slot="items" slot-scope="props">
                   <tr>
                     <td>{{ props.item.name }}</td>
-                    <td class="text-xs-center">{{ props.item.date }}</td>
+                    <td class="text-xs-center">{{ props.item.date | moment('M/D/Y')}}</td>
                     <td class="text-xs-center">{{ props.item.location }}</td>
                     <td class="text-xs-center">{{ props.item.meetingLeader }}</td>
                     <td class="text-xs-center">{{ props.item.worshipLeader }}</td>
@@ -73,8 +72,6 @@
         </v-layout>
       </template>
     </v-container>
-
-  </v-container>
 </template>
 
 <script>
