@@ -1,5 +1,8 @@
 <template>
   <div class="home-page">
+    <div class="text-xs-center">
+      <h1 style="color: white;">Next Meeting in Philomath at the Grangehall this Sunday</h1>
+    </div>
     <div class="center">
       <transition 
         name="big" 
@@ -44,7 +47,7 @@
           ></v-img>
           <v-card-title primary-title>
             <div>
-              <h3 class="headline mb-0">Childrens Ministry</h3>
+              <h3 class="headline mb-0">More About Us</h3>
               <v-card-text style="text-align:justify;">We are a Hive Communities fellowship. We are one small church in a network of churches who are moving forward together, united in purpose, as a family of the faith. We are passionate about nurturing and developing the God-given gifts in each and every person as we live out Christ’s love for the world. We don’t have a paid staff, or any kind of professional clergy. Our elders work for their own livings, and the burdens of teaching, worship leading, and administration are happily shared by a leadership team of mature Christian volunteers.
                 <br/><br/>
                 As a church we hold traditional conservative values.
@@ -101,6 +104,8 @@
       leave-active-class="animated fadeOutRight">
       <img src="/static/ButtonCalendar.png" @click="showSchedule=!showSchedule, showButtons=!showButtons" v-if="showButtons" class="custom-button schedule-button"/>
     </transition>
+  <BottomNav />
+
   </div>
 </template>
 
@@ -114,6 +119,7 @@ import About from "../components/About.vue";
 import Quotes from "../components/Quotes.vue";
 import Children from "../components/Children.vue";
 import Calendar from "../components/Calendar.vue";
+import BottomNav from "../components/BottomNav.vue"
 
 export default {
   name: "home",
@@ -124,7 +130,8 @@ export default {
     About,
     Quotes,
     Children,
-    Calendar
+    Calendar,
+    BottomNav
   },
   data() {
     return {
