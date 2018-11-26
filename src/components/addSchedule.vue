@@ -54,7 +54,7 @@ export default {
   data: () => ({
     menu: false,
     schedule: {
-      date: '',
+      date: new Date().toISOString().substr(0, 10),
       location: "",
       meetingLeader: "",
       worshipLeader: "",

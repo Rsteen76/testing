@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <div class="text-xs-center">
-      <h1 style="color: white;">Next Meeting in Philomath at the Grangehall this Sunday</h1>
+      <h1 class="info-text">{{ nextDate.format('LL') }}</h1>
     </div>
     <div class="center">
       <transition 
@@ -78,39 +78,49 @@
           </v-card-title>
         </v-card>
       </div>
-      <div v-if="showSchedule">
+      <div v-if="showCalendar">
         <Calendar/>
       </div>
       </transition>
     </div>
 
     <!-- Buttons -->
-    <img src="/static/ButtonHome.png" @click="showButtons=true, showChildren=false, showInfo=false, showSchedule=false"  class="home-button custom-button"/>
+    <!-- Home Button -->
+    <img src="/static/ButtonHome.png" @click="showButtons=true, showChildren=false, showInfo=false, showCalendar=false"  class="home-button custom-button"/>
+
+    <!-- Children Button -->
     <transition 
       name="custom-classes-transition" 
       enter-active-class="animated fadeInLeft" 
       leave-active-class="animated fadeOutLeft">
       <img src="/static/ButtonKids.png" @click="showChildren=!showChildren, showButtons=!showButtons" v-if="showButtons" class="custom-button children-button"/>
     </transition>
+    
+    <!-- Info Button -->
     <transition 
       name="custom-classes-transition" 
       enter-active-class="animated fadeInRight" 
       leave-active-class="animated fadeOutRight">
       <img src="/static/ButtonInfo.png" @click="showInfo=!showInfo, showButtons=!showButtons" v-if="showButtons" class="custom-button more-button"/>
     </transition>
+
+    <!-- Calendar Button -->
     <transition 
       name="custom-classes-transition" 
       enter-active-class="animated fadeInRight" 
       leave-active-class="animated fadeOutRight">
-      <img src="/static/ButtonCalendar.png" @click="showSchedule=!showSchedule, showButtons=!showButtons" v-if="showButtons" class="custom-button schedule-button"/>
+      <img src="/static/ButtonCalendar.png" @click="showCalendar=!showCalendar, showButtons=!showButtons" v-if="showButtons" class="custom-button schedule-button"/>
     </transition>
+  
+  <!-- Footer -->
   <BottomNav />
-
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import { http } from "../config/http.js"
+import moment from 'moment'
+
 import Parallax from "vue-parallaxy";
 
 import Nav from "../components/Nav.vue";
@@ -140,10 +150,24 @@ export default {
       showLogo: true,
       showChildren: false,
       showInfo: false,
-      showSchedule: false,
+      showCalendar: false,
+      nextDate: '',
+      schedules: []
     };
   },
   methods: {
+  // Load all Schedules from database
+  load() {
+    http
+      .get("schedules")
+      .then(response => {
+          this.schedules = response.data.schedules;
+          this.nextSunday()
+      })
+      .catch(e => {
+          this.errors.push(e);
+      });
+    },
     login() {
       this.counter++
       console.log(this.counter)
@@ -154,13 +178,26 @@ export default {
         })
       }
     },
+    nextSunday() {
+      const dayINeed = 7; // for Sunday
+      this.nextDate =  moment().isoWeekday(dayINeed)
+      this.schedules.forEach(schedule => {
+        console.log(moment(schedule.date).format('DD.MM.YY'))
+        if(moment(schedule.date).format('LL') == moment(this.nextDate).format('LL')) {
+          console.log(success);
+        }
+      });
+    }
+  },
+  mounted() {
+    this.load()
   }
 }
 </script>
 <style lang="stylus" scoped>
 .home-page {
   font-family: 'Oxygen', sans-serif;
-  overflow: hidden;
+  overflow: auto;
   width: 100%;
   position: absolute;
   top: 0px;
@@ -169,6 +206,10 @@ export default {
   height: auto;
   background-image: url("/static/GreenTreeBG.jpg");
   background-size: cover;
+}
+.info-text {
+  color: white;
+
 }
 .about-content {
   position: relative;
@@ -181,14 +222,15 @@ export default {
   min-width: 400px; 
 }
 .center {
-  text-align: center;
-  position: relative;
-  top: 45%;
-  transform: translateY(-50%);
   display: block;
-  margin: auto;
   width: 25%;
   min-width: 400px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
   z-index: 2;
 }
 .logo {
@@ -246,6 +288,9 @@ export default {
     overflow-y: auto;
 }
 @media only screen and ( max-width: 800px ) {
+  .info-text {
+    font-size: 1.5em;
+  }
   .custom-button {
     min-width:100px;
   }
@@ -258,11 +303,8 @@ export default {
 
 .center {
   position: relative;
-  top: 50%;
-  transform: translateY(-60%);
-  display: block;
-  margin: auto;
   width: 40%;
+  top: 40%
   min-width: 275px;
 }
   .about-content {
@@ -306,7 +348,7 @@ export default {
 
 @keyframes zoomInBig {
   from {
-    opacity: 0;
+    opacity: .2;
     -webkit-transform: scale3d(2, 2, 2);
     transform: scale3d(2, 2, 2);
   }
@@ -325,8 +367,8 @@ export default {
 .big-enter-active {
   -webkit-animation-name: zoomInBig;
   animation-name: zoomInBig;
-  -webkit-animation-duration: .75s;
-  animation-duration: .75s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }

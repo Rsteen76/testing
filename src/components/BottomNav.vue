@@ -6,10 +6,10 @@
         <v-btn
           v-for="icon in icons"
           :key="icon"
-          class="mx-3 white--text"
+          class="mx-2 white--text"
           icon
         >
-          <v-icon size="24px">{{ icon }}</v-icon>
+          <v-icon small>{{ icon }}</v-icon>
         </v-btn>
       </v-card-text>
 </template>

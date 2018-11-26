@@ -5,10 +5,11 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
+import vueMoment from 'vue-moment'
 import 'vuetify/dist/vuetify.min.css'
 import 'animate.css'
 
-Vue.use(require('vue-moment'))
+Vue.use(vueMoment)
 Vue.use(VueSweetalert2)
 Vue.use(Vuetify, { theme: {
   primary: '#153c00',
