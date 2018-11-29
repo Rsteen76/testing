@@ -121,8 +121,6 @@
 import { http } from "../config/http.js"
 import moment from 'moment'
 
-import Parallax from "vue-parallaxy";
-
 import Nav from "../components/Nav.vue";
 import Hero from "../components/Hero.vue";
 import About from "../components/About.vue";
@@ -134,7 +132,6 @@ import BottomNav from "../components/BottomNav.vue"
 export default {
   name: "home",
   components: {
-    Parallax,
     Nav,
     Hero,
     About,
