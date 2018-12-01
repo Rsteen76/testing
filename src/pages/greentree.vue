@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <div class="text-xs-center">
-      <h1 class="info-text">{{ nextDate.format('LL') }}</h1>
+      <h1 class="info-text">Next Meeting on {{ nextDate.format('LL') }}</h1>
     </div>
     <div class="center">
       <transition 
@@ -205,6 +205,7 @@ export default {
   background-size: cover;
 }
 .info-text {
+  font-size: 3em;
   color: white;
 
 }
@@ -286,7 +287,10 @@ export default {
 }
 @media only screen and ( max-width: 800px ) {
   .info-text {
-    font-size: 1.5em;
+    margin: auto;
+    width: 40%;
+    overflow-wrap: normal;
+    font-size: 1.25em;
   }
   .custom-button {
     min-width:100px;
@@ -301,17 +305,17 @@ export default {
 .center {
   position: relative;
   width: 40%;
-  top: 40%
+  top: 45%
   min-width: 275px;
 }
   .about-content {
     position: absolute;
     width: 90%;
-    height: 90%;
+    height: 80%;
     top: 50%;
     left: 50%;
     margin-left: -45%; /* margin is -0.5 * dimension */
-    margin-top: -55%;
+    margin-top: -40%;
   }
   .scroll {
     max-height: 350px;
@@ -321,12 +325,14 @@ export default {
 @keyframes zoomOutBig {
   from {
     opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 
   50% {
     opacity: 0;
-    -webkit-transform: scale3d(2, 2, 2);
-    transform: scale3d(2, 2, 2);
+    -webkit-transform: scale3d(.5, .5, .5);
+    transform: scale3d(.5, .5, .5);
   }
 
   to {
@@ -345,19 +351,19 @@ export default {
 
 @keyframes zoomInBig {
   from {
-    opacity: .2;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
     -webkit-transform: scale3d(2, 2, 2);
     transform: scale3d(2, 2, 2);
   }
 
-  50% {
+  to {
     opacity: 1;
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
-  }
-
-  to {
-    opacity: 1;
   }
 }
 

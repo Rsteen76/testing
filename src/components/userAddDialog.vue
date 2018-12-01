@@ -9,7 +9,7 @@
           <!-- Begin Input Row -->
           <v-form ref="form">
           <v-text-field label="Name" v-model="user.name" required> </v-text-field>
-          <v-slider label="Age" v-model="user.age" thumb-label step="1" required></v-slider>
+          <v-text-field label="Phone" v-model="user.phone" thumb-label step="1" required></v-text-field>
           <v-text-field label="Email" v-model="user.email" :rules="[rules.email]" required> </v-text-field>
           </v-form>
 
@@ -30,7 +30,7 @@ import { http } from '../config/http'
 export default {
   data: () => ({
     user: {
-      age: 0,
+      phone: '',
       name: '',
       email: ''
     },
@@ -62,7 +62,7 @@ export default {
 
     load() {
       this.user = {
-        age: 0,
+        phone: '',
         email: '',
         name: ''
       }
@@ -73,9 +73,9 @@ export default {
       this.load()
       this.$emit('closeAdd')
     },
-
+    // Add validation for phone number.
     checkForm() {
-      if (this.user.age <= 0 || this.user.name == '' || this.user.email == '') {
+      if (this.user.phone <= 0 || this.user.name == '' || this.user.email == '') {
         return true
       } else {
         return false

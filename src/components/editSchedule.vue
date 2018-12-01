@@ -34,6 +34,7 @@
         <v-text-field label="Busy Bees Leader" v-model="changedSchedule.busyBees"> </v-text-field>
         <v-text-field label="Nursery Leader" v-model="changedSchedule.nursery"> </v-text-field>
         <v-text-field label="Logistic Leader" v-model="changedSchedule.logistics"> </v-text-field>
+        <v-text-field label="Meal Theme" v-model="changedSchedule.mealTheme"> </v-text-field>
         </v-form>
 
         <v-card-actions>

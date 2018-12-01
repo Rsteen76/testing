@@ -1,6 +1,6 @@
 <template>
   <v-container class="calendar">
-    <v-layout row wrap>
+    <v-layout row wrap class="scroll">
       <v-flex xs12  mb-3>
         <v-expansion-panel popout>
           <v-expansion-panel-content
@@ -15,6 +15,7 @@
               <v-card-text class="headline">Busy Bees: {{schedule.busyBees }} </v-card-text>
               <v-card-text class="headline">Nursery: {{schedule.nursery }} </v-card-text>
               <v-card-text class="headline">Logistics: {{schedule.logistics }} </v-card-text>
+              <v-card-text class="headline">Meal Theme: {{schedule.mealTheme }} </v-card-text>
               <img src="" alt="">
             </v-card>
           </v-expansion-panel-content>
@@ -57,5 +58,10 @@ import moment from 'moment'
 <style scoped>
 .calendar,.headline,.display-1 {
   font-family: 'Libre Baskerville', serif !important;
+  font-size: .85em;
+}
+.scroll {
+    max-height: 80vh;
+    overflow-y: auto;
 }
 </style>

@@ -9,7 +9,7 @@
         <!-- Begin Input Row -->
         <v-form ref="form">
           <v-text-field label="Name" v-model="changedUser.name"> </v-text-field>
-          <v-slider label="Age" v-model="changedUser.age" thumb-label step="1"></v-slider>
+          <v-text-field label="Phone" v-model="changedUser.phone" thumb-label step="1"></v-text-field>
           <v-text-field label="Email" v-model="changedUser.email" :rules="[rules.email]"> </v-text-field>
         </v-form>
 
@@ -31,7 +31,7 @@ export default {
     changedUser: {
       name: '',
       email: '',
-      age: 0
+      phone: ''
     },
     editDone: true
   }),
@@ -75,7 +75,7 @@ export default {
     },
 
     checkForm() {
-      if (this.changedUser.age <= 0 || this.changedUser.name == '' || this.changedUser.email == '') {
+      if (this.changedUser.phone <= 0 || this.changedUser.name == '' || this.changedUser.email == '') {
         return true
       } else {
         return false

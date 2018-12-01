@@ -2,7 +2,7 @@
 <div>
 <img src="/static/ButtonHome.png" @click="$router.push('/#/')"  class="home-button custom-button"/>
 
-<v-container mt-4>
+<v-container mt-5>
   <v-form v-model="valid" ref="form" lazy-validation>
     <v-text-field
       label="Email"
@@ -12,6 +12,7 @@
     ></v-text-field>
     <v-text-field
       label="Password"
+      type="password"
       v-model="user.password"
       required
     ></v-text-field>
