@@ -171,9 +171,15 @@ export default {
       this.counter++
       if (this.counter == 5) {
         this.counter = 0
-        this.$router.push ({
-          name: 'login'
-        })
+        if(localStorage.getItem('auth')) {
+          this.$router.push ({
+            name: 'schedules'
+          })
+        } else {
+          this.$router.push ({
+            name: 'login'
+          })
+        }
       }
     },
     nextSunday() {
