@@ -1,7 +1,11 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
 
 var scheduleSchema = new mongoose.Schema({
-  date: Date,
+  date: {
+    type: Date,
+    unique: true,
+    required: true
+  },
   location: String,
   worshipLeader: String,
   meetingLeader: String,

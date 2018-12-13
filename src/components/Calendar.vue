@@ -2,20 +2,20 @@
   <v-container class="calendar">
     <v-layout row wrap class="scroll">
       <v-flex xs12  mb-3>
-        <v-expansion-panel popout>
+        <v-expansion-panel popout class="custom-style">
           <v-expansion-panel-content
-            v-for="(schedule,i) in schedules"
-            :key="i"
+            v-for="(n, index) in 4"
+            :key="index"
           >
-            <div slot="header"><span class="display-1">{{schedule.location}}</span> - <h3>{{moment(schedule.date).format('MMMM Do YYYY')}}</h3></div>
+            <div slot="header"><span class="display-1">{{schedules[index].location}}</span> - <h3>{{moment(schedules[index].date).format('MMMM Do YYYY')}}</h3></div>
             <v-card class="elevation-5">
-              <v-card-text class="headline">Meeting Leader: {{schedule.meetingLeader }} </v-card-text>
-              <v-card-text class="headline">Worship Leader: {{schedule.worshipLeader }} </v-card-text>
-              <v-card-text class="headline">Teacher: {{schedule.teacher }} </v-card-text>
-              <v-card-text class="headline">Busy Bees: {{schedule.busyBees }} </v-card-text>
-              <v-card-text class="headline">Nursery: {{schedule.nursery }} </v-card-text>
-              <v-card-text class="headline">Logistics: {{schedule.logistics }} </v-card-text>
-              <v-card-text class="headline">Meal Theme: {{schedule.mealTheme }} </v-card-text>
+              <v-card-text class="headline">Meeting Leader: {{schedules[index].meetingLeader }} </v-card-text>
+              <v-card-text class="headline">Worship Leader: {{schedules[index].worshipLeader }} </v-card-text>
+              <v-card-text class="headline">Teacher: {{schedules[index].teacher }} </v-card-text>
+              <v-card-text class="headline">Busy Bees: {{schedules[index].busyBees }} </v-card-text>
+              <v-card-text class="headline">Nursery: {{schedules[index].nursery }} </v-card-text>
+              <v-card-text class="headline">Logistics: {{schedules[index].logistics }} </v-card-text>
+              <v-card-text class="headline">Meal Theme: {{schedules[index].mealTheme }} </v-card-text>
               <img src="" alt="">
             </v-card>
           </v-expansion-panel-content>
@@ -31,7 +31,8 @@ import moment from 'moment'
 
   export default {
     data: ()  => ({
-      schedules: []
+      schedules: [],
+      index: ''
     }),
     methods: {
       // Load all Schedules from database
@@ -51,6 +52,9 @@ import moment from 'moment'
     },
     mounted() {
       this.load();
+    },
+    computed: {
+      
     }
   }
 </script>
@@ -59,11 +63,13 @@ import moment from 'moment'
 .calendar,.headline,.display-1 {
   font-family: 'Libre Baskerville', serif !important;
   font-size: .85em;
-  border-radius: 10px;
 
 }
 .scroll {
     max-height: 80vh;
     overflow-y: auto;
+}
+.custom-style {
+  border-radius: 10px !important;
 }
 </style>

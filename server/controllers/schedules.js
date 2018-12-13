@@ -4,12 +4,13 @@ const { Schedule } = require('../models')
 // show all schedules
 exports.index = async (req, res) => {
   // query the DB of all schedules
-  await Schedule.find().exec()
+  await Schedule.find().sort({date: 1}).exec()
   .then(schedules => {
-    res.json({ schedules: schedules})
+    console.log(schedules)
+    res.json({ schedules: schedules })
   })
   .catch(err => {
-    res.json({ error: err, message: 'Could not retrieve schedules'}).status(500)
+    res.json({ error: err, message: 'Could not retrieve schedules' }).status(500)
   })
 }
 
@@ -23,20 +24,21 @@ exports.store = async (req, res) => {
       res.status(201).json({ data: schedule })
     })
     .catch(err => {
-      let errStatus = err.name === 'ValidationError' ? 400 : 500
-      res.status(errStatus).json({err: err})
+      res.status(500).send(err)
     })
 }
 
 // This function is for looking at one schedule by their mongo id
 exports.show = async (req, res) => {
+  let schedule = new Schedule(req.body)
+
   // Find a schedule
   await schedule.findById(req.params.id).exec()
   .then(schedule => {
-    res.json({ schedule: schedule})
+    res.json({ schedule: schedule })
   })
   .catch(err => {
-    res.json({ error: err, message: 'Could not retrieve schedule'}).status(500)
+    res.json({ error: err, message: 'Could not retrieve schedule' }).status(500)
   })
 }
 

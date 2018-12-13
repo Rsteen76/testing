@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <div class="text-xs-center">
-      <h1 class="info-text">This Sunday in {{ sundayLocation }}</h1>
+      <h1 class="info-text">Meeting this Sunday in {{ sundayLocation }}</h1>
     </div>
     <div class="center">
       <transition 
@@ -10,11 +10,12 @@
         <v-img @click="login(counter)" src="/static/GreenTreeLogo.png" class="logo" v-if="showButtons"/>
 
         <!-- Children Info Section -->
-        <div v-if="showChildren" class="">
+        <div v-if="showChildren" class="scroll">
         <v-card max-height="75vh" class="scroll">
           <v-img
             src="/static/Kids.png"
             aspect-ratio="2.75"
+            style="border-radius-top: 10px;"
           ></v-img>
           <v-card-title primary-title>
             <div>
@@ -156,6 +157,7 @@ export default {
   methods: {
   // Load all Schedules from database
   load() {
+    window.scrollTo(0,1);
     http
       .get("schedules")
       .then(response => {
@@ -186,8 +188,11 @@ export default {
           console.log(schedule.date);
           console.log(schedule.location)
         }
-      });
-    }
+      })
+    },
+    moveButtons() {
+
+    },
   },
   mounted() {
     this.load()
@@ -223,6 +228,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+  border-radius: 10px;
 
   z-index: 2;
 }
@@ -234,7 +240,7 @@ export default {
   color: rgb(47, 170, 47);
   font-size: 7em;
 }
-.home-button {
+.home-button  {
   margin-left: 0px;
   position: absolute;
   left: 0;
@@ -284,10 +290,9 @@ export default {
 
 @media only screen and ( max-width: 800px ) {
   .info-text {
-    margin: auto;
-    width: 40%;
-    overflow-wrap: normal;
-    font-size: 1.25em;
+    margin-top: 50px;
+    width: 100%;
+    font-size: 1.7em;
   }
   .custom-button {
     min-width:100px;
@@ -299,32 +304,33 @@ export default {
     font-size: 3.75em;
   }
 
-.center {
-  position: relative;
-  width: 40%;
-  top: 40%
-  min-width: 275px;
-}
+  .center {
+    position: relative;
+    width: 40%;
+    top: 35%
+    min-width: 275px;
+  }
 
   .scroll {
     max-height: 350px;
     overflow-y: auto;
+  }
 }
-}
+
 @keyframes zoomOutBig {
-  from {
+  0% {
     opacity: 1;
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
   }
 
-  50% {
+  100% {
     opacity: 0;
-    -webkit-transform: scale3d(.5, .5, .5);
-    transform: scale3d(.5, .5, .5);
+    -webkit-transform: scale3d(.1, .1, .1);
+    transform: scale3d(.1, .1, .1);
   }
 
-  to {
+  100% {
     opacity: 0;
   }
 }
@@ -332,24 +338,25 @@ export default {
 .big-leave-active {
   -webkit-animation-name: zoomOutBig;
   animation-name: zoomOutBig;
-  -webkit-animation-duration: .75s;
-  animation-duration: .75s;
+  -webkit-animation-duration: .6s;
+  animation-duration: .6s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
 
 @keyframes zoomInBig {
-  from {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0;
+  
+  0% {
+    opacity: .0;
     -webkit-transform: scale3d(2, 2, 2);
     transform: scale3d(2, 2, 2);
   }
 
-  to {
+  50% {
+    opacity: .6;
+  }
+
+  100% {
     opacity: 1;
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
@@ -359,8 +366,8 @@ export default {
 .big-enter-active {
   -webkit-animation-name: zoomInBig;
   animation-name: zoomInBig;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
+  -webkit-animation-duration: .7s;
+  animation-duration: .7s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }

@@ -11,6 +11,7 @@ import login from '../pages/login.vue'
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   root: '/',
   component: greenTree,
   routes: [

@@ -4,12 +4,11 @@
         style="bottom:0; position: absolute;"
       >
         <v-btn
-          v-for="icon in icons"
-          :key="icon"
           class="mx-2 white--text"
           icon
+          href="https://www.facebook.com/groups/670598423038057/"
         >
-          <v-icon small>{{ icon }}</v-icon>
+          <v-icon large class="fa fa-facebook"></v-icon>
         </v-btn>
       </v-card-text>
 </template>

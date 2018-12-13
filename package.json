@@ -28,6 +28,7 @@
     "nodemon": "^1.18.8",
     "path": "^0.12.7",
     "serve-favicon": "^2.5.0",
+    "twilio": "^3.25.0",
     "vue": "^2.5.21",
     "vue-moment": "^4.0.0",
     "vue-parallaxy": "^1.1.1",

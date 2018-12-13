@@ -16,7 +16,7 @@
           lazy transition="scale-transition" 
           offset-y full-width min-width="290px">
           <v-text-field slot="activator" 
-            v-model="schedule.date" 
+            :value="computedDateFormattedMomentjs" 
             label="Date" 
             prepend-icon="event" 
             readonly>
@@ -37,7 +37,7 @@
         <v-text-field label="Meal Theme" v-model="schedule.mealTheme"> </v-text-field>
         </v-form>
         <v-card-actions>
-          <v-btn @click="btnsubmit()" class="green lighten-1 white--text" :loading="!submitDone">Submit</v-btn>
+          <v-btn @click="btnsubmit()" class="green lighten-1 white--text" :disabled="checkForm()" :loading="!submitDone">Submit</v-btn>
           <v-spacer></v-spacer>
           <v-btn @click="close()" class="red white--text">Close</v-btn>
         </v-card-actions>
@@ -55,7 +55,7 @@ export default {
   data: () => ({
     menu: false,
     schedule: {
-      date: "",
+      date: new Date().toISOString().substr(0, 10),
       location: "",
       meetingLeader: "",
       worshipLeader: "",
@@ -77,8 +77,6 @@ export default {
   methods: {
     btnsubmit() {
       this.submitDone = false
-        console.log(this.schedule)
-
       http
         .post("/schedules", this.schedule, { headers: { 'Authorization': 'Bearer ' + localStorage.auth }})
         .then(response => {
@@ -86,10 +84,13 @@ export default {
           this.alert(true, "Create", "Schedule");
           this.close();
         })
-        .catch(e => {
+        .catch(err => {
           this.submit = true;
-          this.alert(false, "Create", "Schedule");
+          console.log(err)
+          this.$swal('Duplicate Date Entered');
         });
+      this.submitDone = true
+
     },
    formatDate() {
      console.log(this.schedule.date)
@@ -115,18 +116,25 @@ export default {
       this.$emit("closeAdd");
     },
 
-    // checkForm() {
-    //   if (this.schedule.age <= 0 || this.schedule.name == '' || this.schedule.email == '') {
-    //     return true
-    //   } else {
-    //     return false
-    //   }
-    // },
+    checkForm() {
+      if (this.schedule.location == '') {
+        return true
+      } else if (this.schedule.date == '') {
+        return true
+      } else {
+        return false
+      }
+    },
 
     alert(success, callName, resource) {
       console.log("Add Alerting");
       this.$emit("alert", success, callName, resource);
     }
+  },
+  computed: {
+    computedDateFormattedMomentjs () {
+      return this.schedule.date ? moment(this.schedule.date).format('dddd, MMMM Do YYYY') : ''
+    },
   }
 };
 </script>
