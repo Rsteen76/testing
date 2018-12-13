@@ -1,13 +1,13 @@
 <template>
   <v-container class="calendar">
     <v-layout row wrap class="scroll">
-      <v-flex xs12  mb-3>
-        <v-expansion-panel popout class="custom-style">
+      <v-flex xs12 mb-3>
+        <v-expansion-panel popout>
           <v-expansion-panel-content
             v-for="(n, index) in 4"
             :key="index"
           >
-            <div slot="header"><span class="display-1">{{schedules[index].location}}</span> - <h3>{{moment(schedules[index].date).format('MMMM Do YYYY')}}</h3></div>
+            <div slot="header"><span class="display-1">{{schedules[index].location}}</span>  <h3>{{moment(schedules[index].date).format('MMMM Do YYYY')}}</h3></div>
             <v-card class="elevation-5">
               <v-card-text class="headline">Meeting Leader: {{schedules[index].meetingLeader }} </v-card-text>
               <v-card-text class="headline">Worship Leader: {{schedules[index].worshipLeader }} </v-card-text>
@@ -61,6 +61,7 @@ import moment from 'moment'
 
 <style scoped>
 .calendar,.headline,.display-1 {
+  padding: 0;
   font-family: 'Libre Baskerville', serif !important;
   font-size: .85em;
 
@@ -69,7 +70,5 @@ import moment from 'moment'
     max-height: 80vh;
     overflow-y: auto;
 }
-.custom-style {
-  border-radius: 10px !important;
-}
+
 </style>

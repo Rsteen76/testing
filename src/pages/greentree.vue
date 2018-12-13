@@ -15,7 +15,6 @@
           <v-img
             src="/static/Kids.png"
             aspect-ratio="2.75"
-            style="border-radius-top: 10px;"
           ></v-img>
           <v-card-title primary-title>
             <div>
@@ -40,7 +39,7 @@
       </div>
 
     <!-- Show Info Section -->
-    <div v-if="showInfo">
+    <div v-if="showInfo" class="scroll">
       <v-card max-height="75vh" class="scroll">
           <v-img
             src="/static/Kids.png"
@@ -229,6 +228,7 @@ export default {
   left: 50%;
   transform: translate(-50%,-50%);
   border-radius: 10px;
+  overflow: hidden;
 
   z-index: 2;
 }
@@ -312,7 +312,7 @@ export default {
   }
 
   .scroll {
-    max-height: 350px;
+    max-height: 400px;
     overflow-y: auto;
   }
 }
