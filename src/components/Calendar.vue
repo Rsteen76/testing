@@ -59,6 +59,8 @@ import moment from 'moment'
 .calendar,.headline,.display-1 {
   font-family: 'Libre Baskerville', serif !important;
   font-size: .85em;
+  border-radius: 10px;
+
 }
 .scroll {
     max-height: 80vh;

@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <div class="text-xs-center">
-      <h1 class="info-text">Next Meeting on {{ nextDate.format('LL') }}</h1>
+      <h1 class="info-text">This Sunday in {{ sundayLocation }}</h1>
     </div>
     <div class="center">
       <transition 
@@ -142,6 +142,7 @@ export default {
   },
   data() {
     return {
+      sundayLocation: '',
       counter: 0,
       showButtons: true,
       showLogo: true,
@@ -167,7 +168,6 @@ export default {
     },
     login() {
       this.counter++
-      console.log(this.counter)
       if (this.counter == 5) {
         this.counter = 0
         this.$router.push ({
@@ -179,9 +179,12 @@ export default {
       const dayINeed = 7; // for Sunday
       this.nextDate =  moment().isoWeekday(dayINeed)
       this.schedules.forEach(schedule => {
-        console.log(moment(schedule.date).format('DD.MM.YY'))
-        if(moment(schedule.date).format('LL') == moment(this.nextDate).format('LL')) {
-          console.log(success);
+        // console.log(moment(schedule.date).format('LL'))
+        // console.log(moment(this.nextDate).format('LL'))
+        if((moment(schedule.date).format('LL')) == (moment(this.nextDate).format('LL'))) {
+          this.sundayLocation = schedule.location
+          console.log(schedule.date);
+          console.log(schedule.location)
         }
       });
     }
@@ -209,17 +212,9 @@ export default {
   color: white;
 
 }
-.about-content {
-  position: relative;
-  top: 50%;
-  transform: translateY(-60%);
-  display: block;
-  z-index: 1;
-  margin: auto;
-  width: 25%;
-  min-width: 400px; 
-}
+
 .center {
+  position: relative;
   display: block;
   width: 25%;
   min-width: 400px;
@@ -283,8 +278,10 @@ export default {
 }
 .scroll {
   max-height: 75%;
-    overflow-y: auto;
+  overflow-y: auto;
+  border-radius: 10px;
 }
+
 @media only screen and ( max-width: 800px ) {
   .info-text {
     margin: auto;
@@ -305,18 +302,10 @@ export default {
 .center {
   position: relative;
   width: 40%;
-  top: 45%
+  top: 40%
   min-width: 275px;
 }
-  .about-content {
-    position: absolute;
-    width: 90%;
-    height: 80%;
-    top: 50%;
-    left: 50%;
-    margin-left: -45%; /* margin is -0.5 * dimension */
-    margin-top: -40%;
-  }
+
   .scroll {
     max-height: 350px;
     overflow-y: auto;

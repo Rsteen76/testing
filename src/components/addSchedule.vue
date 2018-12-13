@@ -23,7 +23,7 @@
           </v-text-field>
           <v-date-picker 
             v-model="schedule.date"
-            @input="$refs.menu.save(schedule.date)">
+            @input="formatDate">
           </v-date-picker>
         </v-menu>
         </v-flex>
@@ -49,12 +49,13 @@
 
 <script>
 import { http } from "../config/http";
+import moment from 'moment'
 
 export default {
   data: () => ({
     menu: false,
     schedule: {
-      date: new Date().toISOString().substr(0, 10),
+      date: "",
       location: "",
       meetingLeader: "",
       worshipLeader: "",
@@ -90,7 +91,10 @@ export default {
           this.alert(false, "Create", "Schedule");
         });
     },
-
+   formatDate() {
+     console.log(this.schedule.date)
+     this.$refs.menu.save(moment(this.schedule.date).format())
+   },
     load() {
       this.schedule = {
         date: '',
