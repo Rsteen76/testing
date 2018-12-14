@@ -84,6 +84,7 @@
       </transition>
     </div>
 
+
     <!-- Buttons -->
     <!-- Home Button -->
     <img src="/static/ButtonHome.png" @click="showButtons=true, showChildren=false, showInfo=false, showCalendar=false"  class="home-button custom-button"/>
@@ -234,7 +235,6 @@ export default {
   left: 50%;
   transform: translate(-50%,-50%);
   border-radius: 10px;
-  overflow: hidden;
 
   z-index: 2;
 }
