@@ -1,6 +1,6 @@
 <template>
 <div>
-<img src="/static/ButtonHome.png" @click="$router.push('/#/')"  class="home-button custom-button"/>
+<img src="/static/ButtonHome.png" @click="$router.push('/')"  class="home-button custom-button"/>
 
 <v-container mt-5>
   <v-form v-model="valid" ref="form" lazy-validation>

@@ -1,7 +1,7 @@
 <template>
     <div class="topnav" id="myTopnav" :class="{responsive: isActive}">
       <div>
-      <a href="#/" class="active">Green Tree</a>
+      <a href="/" class="active">Green Tree</a>
       </div>
       <template v-if="auth">
         <a @click="logout" style="float: right;">Logout</a>

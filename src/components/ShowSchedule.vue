@@ -3,7 +3,7 @@
     <b-col cols="12">
       <h2>
         Edit Schedule
-        <b-link href="#/schedule">(schedule List)</b-link>
+        <b-link href="/schedule">(schedule List)</b-link>
       </h2>
       <b-jumbotron>
         <template slot="header">

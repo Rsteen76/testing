@@ -9,13 +9,13 @@
           >
             <div slot="header"><span class="display-1">{{schedules[index].location}}</span>  <h3>{{moment(schedules[index].date).format('MMMM Do YYYY')}}</h3></div>
             <v-card class="elevation-5">
-              <v-card-text class="headline">Meeting Leader: {{schedules[index].meetingLeader }} </v-card-text>
-              <v-card-text class="headline">Worship Leader: {{schedules[index].worshipLeader }} </v-card-text>
-              <v-card-text class="headline">Teacher: {{schedules[index].teacher }} </v-card-text>
-              <v-card-text class="headline">Busy Bees: {{schedules[index].busyBees }} </v-card-text>
-              <v-card-text class="headline">Nursery: {{schedules[index].nursery }} </v-card-text>
-              <v-card-text class="headline">Logistics: {{schedules[index].logistics }} </v-card-text>
-              <v-card-text class="headline">Meal Theme: {{schedules[index].mealTheme }} </v-card-text>
+              <v-card-text class="schedule-content"><strong>Meeting Leader: </strong>{{schedules[index].meetingLeader }} </v-card-text>
+              <v-card-text class="schedule-content"><strong>Worship Leader: </strong>{{schedules[index].worshipLeader }} </v-card-text>
+              <v-card-text class="schedule-content"><strong>Teacher: </strong>{{schedules[index].teacher }} </v-card-text>
+              <v-card-text class="schedule-content"><strong>Busy Bees: </strong>{{schedules[index].busyBees }} </v-card-text>
+              <v-card-text class="schedule-content"><strong>Nursery: </strong>{{schedules[index].nursery }} </v-card-text>
+              <v-card-text class="schedule-content"><strong>Logistics: </strong>{{schedules[index].logistics }} </v-card-text>
+              <v-card-text class="schedule-content"><strong>Meal Theme: </strong>{{schedules[index].mealTheme }} </v-card-text>
               <img src="" alt="">
             </v-card>
           </v-expansion-panel-content>
@@ -32,7 +32,7 @@ import moment from 'moment'
   export default {
     data: ()  => ({
       schedules: [],
-      index: ''
+      index: '',
     }),
     methods: {
       // Load all Schedules from database
@@ -62,13 +62,14 @@ import moment from 'moment'
 <style scoped>
 .calendar,.headline,.display-1 {
   padding: 0;
-  font-family: 'Libre Baskerville', serif !important;
-  font-size: .85em;
-
+  /* font-family: 'Libre Baskerville', serif !important; */
+  font-size: 1.1em;
 }
 .scroll {
     max-height: 80vh;
     overflow-y: auto;
 }
-
+.schedule-content {
+  font-size: 1.5em;
+}
 </style>
