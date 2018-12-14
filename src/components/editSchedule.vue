@@ -12,29 +12,29 @@
           :close-on-content-click="false"
           v-model="menu"
           :nudge-right="0" 
-          :return-value.sync="changedSchedule.date"
+          :return-value.sync="schedule.date"
           lazy transition="scale-transition" 
           offset-y full-width min-width="290px">
           <v-text-field slot="activator" 
-            v-model="changedSchedule.date" 
+            :value="computedDateFormattedMomentjs"
             label="Date" 
             prepend-icon="event" 
             readonly>
           </v-text-field>
           <v-date-picker 
-            v-model="changedSchedule.date" 
-            @input="$refs.menu.save(changedSchedule.date)">
+            v-model="changedDate" 
+            @input="formatDate">
           </v-date-picker>
         </v-menu>
         </v-flex>
-        <v-text-field label="Location" v-model="changedSchedule.location"> </v-text-field>
-        <v-text-field label="Meeting Leader" v-model="changedSchedule.meetingLeader"> </v-text-field>
-        <v-text-field label="Worship Leader" v-model="changedSchedule.worshipLeader"> </v-text-field>
-        <v-text-field label="Teacher Leader" v-model="changedSchedule.teacher"> </v-text-field>
-        <v-text-field label="Busy Bees Leader" v-model="changedSchedule.busyBees"> </v-text-field>
-        <v-text-field label="Nursery Leader" v-model="changedSchedule.nursery"> </v-text-field>
-        <v-text-field label="Logistic Leader" v-model="changedSchedule.logistics"> </v-text-field>
-        <v-text-field label="Meal Theme" v-model="changedSchedule.mealTheme"> </v-text-field>
+        <v-text-field label="Location" v-model="schedule.location"> </v-text-field>
+        <v-text-field label="Meeting Leader" v-model="schedule.meetingLeader"> </v-text-field>
+        <v-text-field label="Worship Leader" v-model="schedule.worshipLeader"> </v-text-field>
+        <v-text-field label="Teacher Leader" v-model="schedule.teacher"> </v-text-field>
+        <v-text-field label="Busy Bees Leader" v-model="schedule.busyBees"> </v-text-field>
+        <v-text-field label="Nursery Leader" v-model="schedule.nursery"> </v-text-field>
+        <v-text-field label="Logistic Leader" v-model="schedule.logistics"> </v-text-field>
+        <v-text-field label="Meal Theme" v-model="schedule.mealTheme"> </v-text-field>
         </v-form>
 
         <v-card-actions>
@@ -49,21 +49,23 @@
 </template>
 <script>
 import { http } from '../config/http'
+import moment from 'moment'
 
 export default {
   data: () => ({
     menu: false,
-    changedSchedule: {
-      date: '',
-      location: '',
-      meetingLeader: '',
-      worshipLeader: '',
-      teacher: '',
-      busyBees: '',
-      nursery: '',
-      logistics: '',
-      mealTheme: ''
-    },
+    changedDate: new Date().toISOString().substr(0, 10),
+    // changedSchedule: {
+    //   date: '',
+    //   location: '',
+    //   meetingLeader: '',
+    //   worshipLeader: '',
+    //   teacher: '',
+    //   busyBees: '',
+    //   nursery: '',
+    //   logistics: '',
+    //   mealTheme: ''
+    // },
     editDone: true
   }),
 
@@ -82,9 +84,10 @@ export default {
 
   methods: {
     edit() {
+      console.log()
       this.editDone = false
       http
-        .put("/schedules/" + this.schedule._id, this.changedSchedule, { headers: { 'Authorization': 'Bearer ' + localStorage.auth }})
+        .put("/schedules/" + this.schedule._id, this.schedule, { headers: { 'Authorization': 'Bearer ' + localStorage.auth }})
         .then(response => {
           this.alert(true, 'Edit', 'Schedule')
           this.editDone = true
@@ -95,8 +98,12 @@ export default {
         });
         
     },
-
+    formatDate() {
+      console.log(this.schedule.date)
+      this.$refs.menu.save(moment(this.changedDate).format())
+    },
     close() {
+      this.editDone = true
       this.$emit('closeEdit')
     },
 
@@ -105,20 +112,19 @@ export default {
       this.close()
     },
 
-    // checkForm() {
-    //   if (this.changedSchedule.age <= 0 || this.changedSchedule.name == '' || this.changedSchedule.email == '') {
-    //     return true
-    //   } else {
-    //     return false
-    //   }
-    // }
+    checkForm() {
+      if (this.schedule.date == '' || this.schedule.location == '') {
+        return true
+      } else {
+        return false
+      }
+    }
   },
-
-  mounted() {
-    console.log(this.scheduleToEdit)
-    this.changedSchedule = this.schedule
-  }
-
+  computed: {
+    computedDateFormattedMomentjs () {
+      return this.schedule.date ? moment(this.schedule.date).format('dddd, MMMM Do YYYY') : ''
+    },
+  },
 }
 </script>
 

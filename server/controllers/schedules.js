@@ -6,7 +6,6 @@ exports.index = async (req, res) => {
   // query the DB of all schedules
   await Schedule.find().sort({date: 1}).exec()
   .then(schedules => {
-    console.log(schedules)
     res.json({ schedules: schedules })
   })
   .catch(err => {
@@ -17,6 +16,7 @@ exports.index = async (req, res) => {
 // Store a new schedule
 exports.store = async (req, res) => {
   let schedule = new Schedule(req.body)
+  console.log(schedule)
   // save it in the DB
   await schedule.save()
     .then(schedule => {

@@ -25,6 +25,14 @@
             <v-list-tile-title class="primaryText--text" v-text="item.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="logout">
+          <v-list-tile-action>
+            <v-icon class="primaryText--text">X</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="primaryText--text" >LogOut</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
 
@@ -81,19 +89,19 @@ export default {
         {
           icon: "home",
           title: "Home",
-          href: "/#/",
+          href: "/",
           router: true
         },
         {
           icon: "account_circle",
           title: "Users",
-          href: "/#/users",
+          href: "/users",
           router: true
         },
         {
           icon: "calendar_today",
           title: "Schedule",
-          href: "/#/schedules",
+          href: "/schedules",
           router: true
         }
       ],
@@ -148,6 +156,11 @@ export default {
       } else {
         return 'primary primaryText--text'
       }
+    },
+
+    logout() {
+      localStorage.clear()
+      this.$router.push('/')
     }
   }
 

@@ -21,20 +21,20 @@
               </v-toolbar>
 
               <!-- Build the table -->
-              <v-data-table v-model="selected" :headers="headers" :items="schedules" 
-                select-all item-key="name" class="elevation-5">
+              <v-data-table 
+                :headers="headers" 
+                :items="schedules" 
+                select-all 
+                class="elevation-5">
                 <template slot="headers" slot-scope="props">
-                  <tr class="text-xs-center">
                     <th>
-                    <th v-for="header in props.headers" :key="header.text" class="body-2">
+                    <th v-for="header in props.headers" :key="header._id" class="body-2">
                       {{ header.text }}
                     </th>
-                    <th></th>
-                  </tr>
+                    <th>Action</th>
                 </template>
                 <template slot="items" slot-scope="props">
-                  <tr>
-                    <td>{{ props.item.name }}</td>
+                    <td></td>
                     <td class="text-xs-center">{{ props.item.date | moment('M/D/Y')}}</td>
                     <td class="text-xs-center">{{ props.item.location }}</td>
                     <td class="text-xs-center">{{ props.item.meetingLeader }}</td>
@@ -48,11 +48,15 @@
                       
                       <v-dialog v-model="editDialog" lazy absolute max-width="50%">
                         <v-btn class="" icon slot="activator"> 
-                        <v-icon small class="" @click="setupEdit(props.item)">
-                        edit 
-                      </v-icon>
-                      </v-btn>
-                      <editSchedule :schedule="scheduleToEdit" @closeEdit="editDialog = false" @alert="alert"></editSchedule>
+                          <v-icon small  @click="setupEdit(props.item)">
+                          edit 
+                          </v-icon>
+                        </v-btn>
+                        <editSchedule 
+                          :schedule="editedSchedule"
+                          @closeEdit="close" 
+                          @alert="alert">
+                        </editSchedule>
                       </v-dialog>
                       
                       <v-dialog v-model="deleteDialog" lazy absolute max-width="50%">
@@ -64,7 +68,6 @@
                       <deleteSchedule :schedule="scheduleToDelete" @closeDelete="deleteDialog = false" @alert="alert"></deleteSchedule>
                       </v-dialog>
                     </td>
-                  </tr>
                 </template>
               </v-data-table>
             </v-card>
@@ -83,6 +86,7 @@ import editSchedule from "../components/editSchedule.vue"
 
 export default {
     data: () => ({
+        schedule: [],
         selected: [],
         errors: [],
         schedules: [],
@@ -93,6 +97,9 @@ export default {
         addDialog: false,
         deleteDialog: false,
         editDialog: false,
+        editSchedule: "",
+        editedIndex: -1,
+        editedSchedule: '',
         headers: [
            { text: "Date", align: 'center' },
            { text: "Location", align: 'center'},
@@ -132,17 +139,24 @@ export default {
 
         //opens edit dialog
         setupEdit(schedule) {
-            Object.keys(schedule).forEach(key =>  {
-                this.scheduleToEdit[key] = schedule[key];
-            });
-            this.editDate = schedule.date;
-            this.editDialog = true;
+            this.editedSchedule = this.schedules.indexOf(schedule)
+            this. editedSchedule = Object.assign({}, schedule)
+            this.editDialog = true
         },
 
         alert(success, callName, resource){
             console.log('Page Alerting')
             this.$emit('alert', success, callName, resource)
             this.load()
+        },
+
+        close() {
+          this.schedule = {}
+          this.editDialog = false
+        setTimeout(() => {
+          this.editedSchedule = Object.assign({}, {})
+          this.editedIndex = -1
+        }, 300)
         }
     },
     mounted() {
